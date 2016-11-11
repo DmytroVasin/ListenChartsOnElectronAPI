@@ -1,1 +1,1 @@
-Simple API for "ListenChartsOnElectron":https://github.com/DmytroVasin/ListenChartsOnElectron
+Simple API for [ListenChartsOnElectron](https://github.com/DmytroVasin/ListenChartsOnElectron)
