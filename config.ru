@@ -1,4 +1,6 @@
-# rackup -p 4567
+# rackup
+# heroku addons:open scheduler
+# heroku logs --tail
 
 require './app'
 

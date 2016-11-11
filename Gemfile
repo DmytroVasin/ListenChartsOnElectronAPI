@@ -6,3 +6,6 @@ gem 'rake'
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'sinatra-activerecord'
+
+gem 'httparty'
+gem 'soundcloud'

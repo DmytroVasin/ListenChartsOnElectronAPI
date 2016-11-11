@@ -15,7 +15,8 @@ end
 
 desc 'This task is called by the Heroku scheduler add-on'
 task :update_feed do
-  puts "Updating feed..."
-  # NewsFeed.update
-  puts "done."
+  require './app'
+  require './update_feed'
+
+  UpdateFeed.run
 end
