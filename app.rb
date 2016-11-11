@@ -1,6 +1,9 @@
 require 'sinatra/base'
 require 'sinatra/namespace'
+
 require 'sinatra/activerecord'
+
+# require './config/environments'
 
 class StationSerializer
   def initialize(station)
@@ -50,6 +53,19 @@ class App < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   register Sinatra::Namespace
 
+  configure :production, :development do
+    db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/mydb')
+
+    ActiveRecord::Base.establish_connection(
+        :adapter => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
+        :host     => db.host,
+        :username => db.user,
+        :password => db.password,
+        :database => db.path[1..-1],
+        :encoding => 'utf8'
+    )
+  end
+
   namespace '/api/v1' do
     before do
       content_type :json
@@ -65,4 +81,11 @@ class App < Sinatra::Base
       episodes.map { |episode| EpisodeSerializer.new(episode) }.to_json
     end
   end
+
+  after do
+    # Close the connection after the request is done so that we don't
+    # deplete the ActiveRecord connection pool.
+    ActiveRecord::Base.connection.close
+  end
 end
+

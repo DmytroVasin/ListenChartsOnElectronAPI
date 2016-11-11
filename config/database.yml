@@ -3,6 +3,3 @@ development:
   encoding: unicode
   pool: 5
   database: winamp_api_development
-
-production:
-  url: <%= ENV['DATABASE_URL'] %>
