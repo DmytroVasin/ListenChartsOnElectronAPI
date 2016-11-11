@@ -54,16 +54,7 @@ class App < Sinatra::Base
   register Sinatra::Namespace
 
   configure :production, :development do
-    db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/winamp_api_development')
-
-    ActiveRecord::Base.establish_connection(
-        :adapter => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
-        :host     => db.host,
-        :username => db.user,
-        :password => db.password,
-        :database => db.path[1..-1],
-        :encoding => 'utf8'
-    )
+    ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'postgres://localhost/winamp_api_development')
   end
 
   namespace '/api/v1' do
