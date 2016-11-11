@@ -50,8 +50,6 @@ class App < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   register Sinatra::Namespace
 
-  set :database, { adapter: 'sqlite3', database: 'development.sqlite3' }
-
   namespace '/api/v1' do
     before do
       content_type :json

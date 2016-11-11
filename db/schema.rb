@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20140415201793) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "episodes", force: :cascade do |t|
     t.integer  "station_id"
     t.boolean  "in_top",          default: true, null: false
