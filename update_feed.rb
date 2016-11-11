@@ -6,7 +6,12 @@ class UpdateFeed
 
   def self.run
     Station.all.each do |station|
+      puts '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
+      puts "#{station.name}: #{station.url}"
+      puts '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
+      puts 'Loading...'
       self.new(station).download
+      puts 'Done!'
     end
   end
 
@@ -18,7 +23,9 @@ class UpdateFeed
   end
 
   def download
+    puts "Request to #{@station.url}"
     response = HTTParty.get(@station.url)
+    puts "Response from #{@station.url}"
 
     songs = response['songs']
 
@@ -27,11 +34,15 @@ class UpdateFeed
     songs.each do |song_attrs|
       _attrs = song_attrs.slice('artist', 'title', 'place', 'previousPlace')
 
-      episode = @episodes.find_by(artist: _attrs['artist'], title: _attrs['artist'])
+      episode = @episodes.find_by(artist: _attrs['artist'], title: _attrs['title'])
       if episode
+        puts "Update: #{_attrs['artist']}: #{_attrs['title']}"
         update_place_only(episode, _attrs)
+        puts 'Updated!'
       else
+        puts "Create: #{_attrs['artist']}: #{_attrs['title']}"
         create_new_episode(_attrs)
+        puts 'Created!'
       end
     end
   end
@@ -47,7 +58,9 @@ class UpdateFeed
   end
 
   def create_new_episode(attrs)
+    puts "SoundCloud request start: #{Time.now}"
     tracks = @sc_client.get('/tracks', q: attrs['artist'] +' - '+ attrs['artist'] )
+    puts "SoundCloud request end: #{Time.now}"
     detected_track = tracks[0]
 
     if detected_track.present?

@@ -1,9 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/namespace'
-
 require 'sinatra/activerecord'
-
-# require './config/environments'
 
 class StationSerializer
   def initialize(station)
@@ -26,11 +23,11 @@ class EpisodeSerializer
 
   def as_json(*)
     {
+      place:            @episode.place,
       id:               @episode.id,
       station_id:       @episode.station_id,
       artist:           @episode.artist,
       title:            @episode.title,
-      place:            @episode.place,
       previous_place:   @episode.previous_place,
       sc_id:            @episode.sc_id,
       sc_title:         @episode.sc_title,
@@ -63,12 +60,12 @@ class App < Sinatra::Base
     end
 
     get '/stations' do
-      stations = Station.all
+      stations = Station.all.order(:id)
       stations.map { |station| StationSerializer.new(station) }.to_json
     end
 
     get '/stations/:id/episodes' do |id|
-      episodes = Episode.where(station_id: id, in_top: true)
+      episodes = Episode.where(station_id: id, in_top: true).order(:place)
       episodes.map { |episode| EpisodeSerializer.new(episode) }.to_json
     end
   end
