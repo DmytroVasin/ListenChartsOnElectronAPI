@@ -59,7 +59,14 @@ class UpdateFeed
 
   def create_new_episode(attrs)
     puts "SoundCloud request start: #{Time.now}"
-    tracks = @sc_client.get('/tracks', q: attrs['artist'] +' - '+ attrs['artist'] )
+
+    begin
+      tracks = @sc_client.get('/tracks', q: attrs['artist'] +' - '+ attrs['artist'] )
+    rescue Soundcloud::ResponseError => e
+      puts "Error: #{e}"
+      return
+    end
+
     puts "SoundCloud request end: #{Time.now}"
     detected_track = tracks[0]
 
