@@ -12,3 +12,10 @@ namespace :db do
     Rake::Task['db:seed'].invoke
   end
 end
+
+desc 'This task is called by the Heroku scheduler add-on'
+task :update_feed do
+  puts "Updating feed..."
+  # NewsFeed.update
+  puts "done."
+end
