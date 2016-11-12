@@ -19,6 +19,7 @@ heroku logs --tail
 heroku pg:reset DATABASE
 heroku run rake db:migrate
 heroku run rake db:seed
+heroku pg:info
 ```
 
 ##### Check that BD is here
