@@ -91,7 +91,7 @@ class UpdateFeed
       puts '------------------------------------ALERT-------------------------------------'
       puts 'Track was not found!'
       puts "@sc_client = SoundCloud.new(client_id: 'f4323c6f7c0cd73d2d786a2b1cdae80c')"
-      puts "@sc_client.get('/tracks', q: '" + attrs['artist'] + "' - '" + attrs['artist'] + "')"
+      puts "@sc_client.get('/tracks', q: '" + attrs['artist'] + "' - '" + attrs['title'] + "')"
       puts '------------------------------------ALERT-------------------------------------'
     end
   end
