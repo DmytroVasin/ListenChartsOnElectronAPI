@@ -60,7 +60,7 @@ class App < Sinatra::Base
     end
 
     get '/stations' do
-      stations = Station.all.order(:id)
+      stations = Station.all.order(:place)
       stations.map { |station| StationSerializer.new(station) }.to_json
     end
 
