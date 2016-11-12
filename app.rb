@@ -10,8 +10,8 @@ class StationSerializer
   def as_json(*)
     {
       id: @station.id,
-      title: @station.name,
-      author: @station.url
+      name: @station.name,
+      url: @station.url
     }
   end
 end
