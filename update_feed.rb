@@ -61,7 +61,7 @@ class UpdateFeed
     puts "SoundCloud request start: #{Time.now}"
 
     begin
-      tracks = @sc_client.get('/tracks', q: attrs['artist'] +' - '+ attrs['artist'] )
+      tracks = @sc_client.get('/tracks', q: attrs['artist'] +' - '+ attrs['title'] )
     rescue Soundcloud::ResponseError => e
       puts "Error: #{e}"
       return
@@ -87,6 +87,12 @@ class UpdateFeed
       }
 
       @station.episodes.create(episode_attributes)
+    else
+      puts '------------------------------------ALERT-------------------------------------'
+      puts 'Track was not found!'
+      puts "@sc_client = SoundCloud.new(client_id: 'f4323c6f7c0cd73d2d786a2b1cdae80c')"
+      puts "@sc_client.get('/tracks', q: '" + attrs['artist'] + "' - '" + attrs['artist'] + "')"
+      puts '------------------------------------ALERT-------------------------------------'
     end
   end
 end
