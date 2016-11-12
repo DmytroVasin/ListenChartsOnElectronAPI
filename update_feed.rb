@@ -32,7 +32,7 @@ class UpdateFeed
 
     songs.each do |song_attrs|
       _attrs = song_attrs.slice('artist', 'place', 'previousPlace')
-      _attrs.merge!({ title: song_attrs['title'].gsub(/\([^()]*?\)/, '').squeeze(' ').strip })
+      _attrs.merge!({ 'title' => song_attrs['title'].gsub(/\([^()]*?\)/, '').squeeze(' ').strip })
 
       episode = @episodes.find_by(artist: _attrs['artist'], title: _attrs['title'])
       if episode
