@@ -31,7 +31,7 @@ class EpisodeSerializer
       previous_place:   @episode.previous_place,
       sc_id:            @episode.sc_id,
       sc_title:         @episode.sc_title,
-      sc_duration:      @episode.sc_duration,
+      sc_duration:      @episode.sc_duration/1000,
       sc_stream_url:    @episode.sc_stream_url,
       sc_image_url:     @episode.sc_image_url,
       sc_download_url:  @episode.sc_download_url
