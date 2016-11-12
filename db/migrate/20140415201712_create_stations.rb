@@ -3,6 +3,7 @@ class CreateStations < ActiveRecord::Migration[5.0]
     create_table :stations do |t|
       t.string :name
       t.text :url
+      t.integer :place
 
       t.timestamps
     end
