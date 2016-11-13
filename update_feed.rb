@@ -68,7 +68,8 @@ class UpdateFeed
     end
 
     puts "SoundCloud request end: #{Time.now}"
-    detected_track = tracks[0]
+    # streamable
+    detected_track = tracks.detect{ |sc_track| sc_track.streamable == true }
 
     if detected_track.present?
 
@@ -88,11 +89,13 @@ class UpdateFeed
 
       @station.episodes.create(episode_attributes)
     else
-      puts '------------------------------------ALERT-------------------------------------'
-      puts 'Track was not found!'
+      puts "------------------------------------ALERT-------------------------------------"
+      puts "Track was not found!"
+      puts "heroku console"
+      puts "require 'soundcloud'"
       puts "@sc_client = SoundCloud.new(client_id: 'f4323c6f7c0cd73d2d786a2b1cdae80c')"
       puts "@sc_client.get('/tracks', q: '" + attrs['artist'] + "' - '" + attrs['title'] + "')"
-      puts '------------------------------------ALERT-------------------------------------'
+      puts "------------------------------------ALERT-------------------------------------"
     end
   end
 end
