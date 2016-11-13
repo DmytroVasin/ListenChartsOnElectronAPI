@@ -84,6 +84,7 @@ class UpdateFeed
         sc_duration: detected_track.duration,
         sc_stream_url: detected_track.stream_url + "?client_id=#{UpdateFeed::CLIENT_ID}",
         sc_image_url: detected_track.artwork_url,
+        sc_permalink_url: detected_track.permalink_url,
         sc_download_url: (detected_track.downloadable ? (detected_track.download_url + "?client_id=#{UpdateFeed::CLIENT_ID}") : nil)
       }
 

@@ -15,6 +15,7 @@ class CreateEpisodes < ActiveRecord::Migration[5.0]
       t.string  :sc_stream_url
       t.string  :sc_image_url
       t.string  :sc_download_url
+      t.string  :sc_permalink_url
 
       t.timestamps
     end

@@ -34,7 +34,8 @@ class EpisodeSerializer
       sc_duration:      @episode.sc_duration/1000,
       sc_stream_url:    @episode.sc_stream_url,
       sc_image_url:     @episode.sc_image_url,
-      sc_download_url:  @episode.sc_download_url
+      sc_download_url:  @episode.sc_download_url,
+      sc_permalink_url: @episode.sc_permalink_url
     }
   end
 end
